@@ -128,10 +128,17 @@ namespace MasterPol.Pages
                 }
                 else
                 {
+                    int rating;
+                    if (!int.TryParse(RatingTextBox.Text, out rating) || rating < 0)
+                    {
+                        
+                        MessageBox.Show("Рейтинг должен быть целым неотрицательным числом.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                     var newPartner = new Data.PartnersImport
                     {
                         IdTypeOfParther = selectedCategory.Id,
-                        Reiting = Convert.ToInt32(RatingTextBox.Text),
+                        Reiting = rating,
                         PhoneOfPartner = PhoneTextBox.Text,
                         EmailOfPartner = EmailTextBox.Text
                     };
